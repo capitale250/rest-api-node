@@ -5,10 +5,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": " NODE_ENV='test'& jest --watchAll --coverage --runInBand --verbose --silent   ./src/tests",
+    "test": " NODE_ENV='test'& jest --watchAll --coverage --runInBand --detectOpenHandles --verbose --silent   ./src/tests",
   
     "start": "nodemon index.js"
   },
+  
   "author": "armstrong",
   "license": "ISC",
   "dependencies": {

@@ -1,6 +1,7 @@
 import {articlesModel} from '../modules/models.js'
 
-
+import {parserError} from '../config/errorhandles.js'
+import {bearerHeader} from '../config/verify.js'
 import jwt from 'jsonwebtoken'
 
 export class Articles{
@@ -15,6 +16,7 @@ export class Articles{
                 res.send(articleData)
             })
         }else{
+            console.log(bearerHeader)
             articlesModel.find(function(err, articles) {
                 if (err)
                     res.send(err)
@@ -37,21 +39,26 @@ export class Articles{
                 // res.setHeader('Content-Type', 'application/json')
                 console.log(req.body.title)
                 console.log(req.body.description)
-                articlesModel.create({
+                articlesModel.findOne({ Title: req.body.title}, (err, blog)=> {
+                   if (blog){console.log (blog); return res.status(500).send(`blog allready on the server with tiltle${req.body.title} `);}
+                   else{
+                   articlesModel.create({
                     Title : req.body.title,
                     FeaturedImage : '/images/articles/' + req.file.filename /*'images/kbs.jpg'*/,
                     Description :req.body.description ,
                     PostDate: new Date()
-                }, 
-                function(err, article) {
+                    }, 
+                   function(err, article) {
                     if (err){
-                        res.json(err);
+                        res.json(parserError(err));
                     }else{
                         res.json(article)
                         
-                    }   
-                }
-             );
+                        }   
+                     }
+              )}})
+            
+        
                
     }
     //update an article

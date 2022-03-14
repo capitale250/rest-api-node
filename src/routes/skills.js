@@ -13,6 +13,14 @@ export class Skills{
             error.httpStatusCode = 400
             return next(error)
         }
+        skillsModel.findOne({Title : req.body.title},function(skill){
+            if(skill){
+                const error = new Error('skill arleady exit  a file')
+                error.httpStatusCode = 400
+                return next(error)
+            }else{
+
+    
         skillsModel.create({
         Title : req.body.title,
         SkillImage : '/images/skills/' + file.filename,
@@ -28,6 +36,8 @@ export class Skills{
             }   
         }
     );
+}
+})
             }
 
     static getSkills(req, res) {

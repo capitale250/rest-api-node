@@ -5,6 +5,7 @@ const { Schema, model } = mongoose
 
 var UserSchema = new Schema({
     Name: String,
+    
     Profession: String
 });
 

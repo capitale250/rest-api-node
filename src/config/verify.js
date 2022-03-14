@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import config from '../routes/config.js'
+let bearerHeader 
 export function verifyToken(req, res, next) {
 
 
@@ -35,7 +36,7 @@ export function verifyToken(req, res, next) {
 
 
   //  
-    const bearerHeader = req.headers['authorization'];
+     const bearerHeader = req.headers['authorization'];
   
     if (!bearerHeader) 
 
@@ -45,7 +46,7 @@ export function verifyToken(req, res, next) {
     const bearer = bearerHeader.split(' ')
     const token = bearer[1]
         
-    console.log(token )
+    console.log(token)
     jwt.verify(token, config.secret, function(err, decoded) {      
       if (err) 
         return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });    
@@ -58,5 +59,6 @@ export function verifyToken(req, res, next) {
   
 
 }
-
+console.log(bearerHeader+'>>>>>.')
+export {bearerHeader }
 export {verifyToken as default}

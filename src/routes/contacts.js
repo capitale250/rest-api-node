@@ -1,4 +1,5 @@
 import {contactsModel} from '../modules/models.js'
+import {parserError} from '../config/errorhandles.js'
 
 // list all contacts
 export class Contacts {
@@ -21,7 +22,7 @@ export class Contacts {
                     }, 
                     function(err, Contact) {
                         if (err){
-                            res.json(err.errors);
+                            res.json(parserError(err));
                         }else{
                             res.json(Contact)
                             //console.log('Contact created')

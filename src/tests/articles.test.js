@@ -15,16 +15,13 @@ import {newsletterModel, articlesModel} from '../modules/models.js'
 
 chai.use(chaiHttp)
 const agent = request.agent(app);
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjY3NjVjYzczZmRhY2NhMmJkYzUzZiIsImlhdCI6MTY0NjkzMjM0NywiZXhwIjoxNjQ3MDE4NzQ3fQ._POFtV5u4VMiYnIeD_mmDLhU3DoW-p-61297MK_2A5A"
 
-beforeEach(function(done){
-    // this.timeout(20000);
-   
-    // jest.setTimeout(() => {
-    //     console.log("Time's up -- stop!");
-     
-    //   }, 20000);
-    agent
+const token = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjY3NjVjYzczZmRhY2NhMmJkYzUzZiIsImlhdCI6MTY0NzI1MjI1NCwiZXhwIjoxNjQ3MzM4NjU0fQ.f9gakJuJHprHFkQ8N8HjjNcr9P2ExU19ctwJTOUh2p4"
+// beforeAll(() => jest.setTimeout(90 * 1000))
+beforeAll( function(done){
+ 
+    // chai.request(app)
+     agent
     .post('/api/articles/add')
     .set("Authorization", token)
     .set('Content-Type', 'multipart/form-data')
@@ -38,12 +35,13 @@ beforeEach(function(done){
     done();
     });
 
-})
+},50000)
 
 describe('Articles', function(){
     
     it('should insert an article', function(done){
-        chai.request(app)
+        // chai.request(app)
+        agent
             .post('/api/articles/add')
             .set("Authorization", token)
             .set('Content-Type', 'multipart/form-data')
@@ -52,47 +50,35 @@ describe('Articles', function(){
             .field("description", "this is from the test")
             .end((err, res) => {
                 if(err) done(err)                    
-                chai.expect(res).have.status(500);
-                chai.expect(res.body).be.a('object');
-                chai.expect(res.body).to.have.deep.property("_id")
+                agent.expect(res).have.status(200);
+                agent.expect(res.body).be.a('object');
+                agent.expect(res.body).to.have.deep.property("_id")
             done();
             });
-    })
+    },20000)
     
-    it('should delete article', function(done){
-        this.timeout(20000);
-            articlesModel.findOne({Title: "1article to delete"}).then(function(result){
-                chai.request(app)
-                .post('/api/articles/delete')
-                .set('Content-Type', 'application/json')
-                .set("Authorization", token)
-                .send({"id":result._id})
-                .then((res) => {
-                    chai.expect(res).have.status(200);
-                    chai.expect(res.body).be.a('object');
-                    chai.expect(res.body).to.have.deep.property("_id")
-                    done();
-                })   
-                .catch((err) =>{
-                    console.log(err)
-                    done(err)
-                })                 
-            })
-    })
+  
     it('should view an article', (done)=>{
-        request(app)
+        chai.request(app)
         .get('/api/articles/view')
-        .query({"id":"5f6386f45bcb341881d85681"})
-        .then((res)=>{
-            chai.expect(res).have.status(200)
-            chai.expect(res.body).be.a('object')
+        .query({"id":"6228905ace8eac57c10d6568"})
+        // .then((res)=>{
+        //     chai.expect(res).have.status(200)
+        //     chai.expect(res.body).be.a('object')
+        //     chai.expect(res.body).to.have.deep.property("_id")
+        //     done()
+        // })
+        // .catch((err) =>{
+        //     done(err)
+        // })
+        .end((err, res) => {
+            if(err) done(err)                    
+            chai.expect(res).have.status(200);
+            chai.expect(res.body).be.a('object');
             chai.expect(res.body).to.have.deep.property("_id")
-            done()
-        })
-        .catch((err) =>{
-            done(err)
-        })
-    })
+        done();
+        });
+    },20000)
     it('should view all articles', function(done){
         request(app)
         .get('/api/articles/view')
@@ -103,24 +89,44 @@ describe('Articles', function(){
             chai.expect(res.body).to.be.an('array')
             done()
         })
-    })
+    },20000)
     it('should update an article', (done)=>{
         var tdate = new Date()
         request(app)
         .post('/api/articles/update')
         .set("Authorization", token)
         .send({"title":"Coolest from postman (updated from test)"})
-        .send({"id":"5f6386f45bcb341881d85681"})
+        .send({"id":"6228905ace8eac57c10d6568"})
         .then((res)=>{
             chai.expect(res).have.status(200)
             chai.expect(res.body).to.be.an('object')
-            chai.expect(res.body).to.have.deep.property('Title').does.not.eql("Coolest from postman (updated from test)")
+            chai.expect(res.body).to.have.deep.property('Title').does.not.eql("Coolest from postman (updated from test")
             done()
         })
         .catch((err)=>{
             done(err)
         })
     })
+    it('should delete article', function(done){
+        
+        articlesModel.findOne({Title: "1article to delete"}).then(function(result){
+            chai.request(app)
+            .post('/api/articles/delete')
+            .set('Content-Type', 'application/json')
+            .set("Authorization", token)
+            .send({"id":result._id})
+            .then((res) => {
+                chai.expect(res).have.status(200);
+                chai.expect(res.body).be.a('object');
+                chai.expect(res.body).to.have.deep.property("_id")
+                done();
+            })   
+            .catch((err) =>{
+                console.log(err)
+                done(err)
+            })                 
+        })
+})
 })
 afterAll(function(){
     articlesModel.findOne({Title: "2Yeah from tests"}).then(function(result){

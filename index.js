@@ -30,7 +30,7 @@ app.use(router)
 
 
 
-const port = Port || 3000;
+const port = process.env.PORT||Port || 3000;
 
 
 
@@ -129,8 +129,10 @@ const port = Port || 3000;
 //     }
 
 // })
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, function() {
+        console.log(`Example app listening on port ${port}!`)
+      });}
 
-app.listen(port, function() {
-  console.log(`Example app listening on port ${port}!`)
-});
+
 export default app
