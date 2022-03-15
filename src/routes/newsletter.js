@@ -45,9 +45,9 @@ export class Newsletter{
                 //console.log(req.body.email);
                 try{
                     newsletterModel.create({
-                        //Name : 'Mj',
+                        
                         Email : req.body.email,
-                        //Message : 'Cool',
+                        
                         RequestDate: new Date()
                         }, 
                         function(err, emailInfo) {
@@ -56,7 +56,7 @@ export class Newsletter{
                             }else{
                                 return res.json(emailInfo)
                                 
-                                //console.log('Newsletter created')
+                               
                             }   
                         }
                     );

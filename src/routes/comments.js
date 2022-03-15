@@ -12,12 +12,13 @@ export class Comments{
         articlesModel.find( {},commentsProjection ,function(err, comments) {
             if (err)
                 res.send(err)
-                console.log(comments)
+            console.log(comments)
             
             
             comments.forEach((doc) =>{
-                // console.log(doc.Comments);
-                res.json(doc.Comments);
+                // console.log('hello')
+                 console.log(doc.Comments);
+                // res.json(doc.Comments);
                 doc.Comments.forEach(docs => {
                     if(docs.Username){
                         commentsContainer.push(docs)
@@ -27,12 +28,12 @@ export class Comments{
 
             })
             console.log(counter)
-            //console.log(commentsContainer);
+            console.log(commentsContainer);
             commentsContainer.push({"size":counter})
             res.json(commentsContainer);
         });
     }
-    // create a new contact
+    // create a new comment
     static createComment(req, res) {
         const id = req.query.id
         console.log(id)
@@ -40,13 +41,17 @@ export class Comments{
             res.json({message:"post id error"})
         }else if(!req.body.comment){
             res.json({mesage:"message null"})
+        }else if(!req.body.username){
+            res.json({mesage:"enter user name"})
+        }else if(!req.body.email){
+            res.json({mesage:"enter user email"})   
         }else{
-            const commentData = [{ 
+            const commentData = { 
                         Username: req.body.username,
                         Email: req.body.email,
                         Comment:req.body.comment,
                         CommentDate: new Date()
-                    }]
+                    }
             articlesModel.findByIdAndUpdate(id, {
                 
                 $push:{ "Comments": commentData}
@@ -61,8 +66,8 @@ export class Comments{
             );   
         }
     }
-    static deleteComment(app) {
-        app.post('/api/comments/delete', (req, res) =>{
+    static deleteComment(req,res) {
+       
             const id =  req.query.id
             const comment = req.body.email
             var cdate = req.body.commentDate
@@ -74,14 +79,21 @@ export class Comments{
                 res.json({code:2})
             }else{
                 articlesModel.findByIdAndUpdate(id, 
-                    {$pull:{Comments:{CommentDate: cdate}}},
+                    {$pull:
+                        {Comments:
+                            
+                                {CommentDate: cdate}
+
+                            }
+                        
+                        },
                     (err, result) =>{
                         if(err) console.log("DeleteErr[Comment]:" + err)
                         res.json(result)
                     }
                 )
             }
-        })
+       
     }
 }
 // list all contacts

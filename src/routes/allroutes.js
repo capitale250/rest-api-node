@@ -25,6 +25,7 @@ console.log('>>>>>>>>>>')
 //coments
 router.get('/api/comments/view', Comments.getComments)
 router.post('/api/comments/add', Comments.createComment)
+router.post('/api/comments/delete', verifyToken,Comments.deleteComment)
 
 //skills
 router.get('/api/skills/view', Skills.getSkills)
