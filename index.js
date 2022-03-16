@@ -9,7 +9,7 @@ import modelcom from './commentsch.js'
 import router from './src/routes/allroutes.js'
 import config from './config.js';
 console.log(config)
- const {Port} = config|| undefined ;
+ //const {Port} = config|| undefined ;
 
 
 mongoose.connect("mongodb+srv://capitale:987poi@cluster0.jcaob.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",(Err,resu)=>{
@@ -30,7 +30,8 @@ app.use(router)
 
 
 
-const port = process.env.PORT||Port || 3000;
+//const port = process.env.PORT||Port || 3000;
+const port = process.env.PORT|| 3000;
 
 
 
