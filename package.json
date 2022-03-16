@@ -8,7 +8,7 @@
     "test": " NODE_ENV='test'& jest --watchAll --coverage --runInBand --detectOpenHandles --verbose --silent   ./src/tests",
   
      
-     "start": "index.js"
+     "start": "node index.js"
   },
   
   "author": "armstrong",
