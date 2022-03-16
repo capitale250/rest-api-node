@@ -1,6 +1,6 @@
 // const express = require('express');
 import express from 'express'
-import cors from'cors'
+//import cors from'cors'
 import mongoose from 'mongoose'
 import model from './scheem-model.js'
 import modelcom from './commentsch.js'
@@ -23,7 +23,7 @@ mongoose.connect("mongodb+srv://capitale:987poi@cluster0.jcaob.mongodb.net/myFir
 })
 const app = express();
 
-app.use(cors())
+//app.use(cors())
 app.use(express.json())
 app.use(router)
 
