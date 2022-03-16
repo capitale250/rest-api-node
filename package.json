@@ -7,7 +7,7 @@
   "scripts": {
     "test": " NODE_ENV='test'& jest --watchAll --coverage --runInBand --detectOpenHandles --verbose --silent   ./src/tests",
   
-     //"start": "nodemon index.js"
+     
      "start": "index.js"
   },
   
