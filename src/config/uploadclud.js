@@ -1,4 +1,6 @@
 import cloudinary from 'cloudinary';
+import multer from 'multer'
+import 'fs'
 // import { file } from 'tmp';
 
 // const upds =function uplcloud(){
