@@ -16,7 +16,7 @@ export class Projects{
                 res.setHeader('Content-Type', 'application/json')
                 projectsModel.create({
                 Title : req.body.title,
-                ProjectImage : '/images/projects/' + file.filename,
+                ProjectImage : req.file.path ,
                 Description : req.body.description,
                 projectsDate: new Date()
                 }, 
