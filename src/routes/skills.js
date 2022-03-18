@@ -23,7 +23,7 @@ export class Skills{
     
         skillsModel.create({
         Title : req.body.title,
-        SkillImage : '/images/skills/' + file.filename,
+        SkillImage : req.file.path ,
         //Description : 'A portfolio website where i can meet with my clients',
         SkillDate: new Date()
         }, 
