@@ -6,6 +6,7 @@ import { Comments } from './comments.js';
 import { Skills } from './skills.js';
 import {Newsletter} from './newsletter.js'
 import { upload } from '../config/upload.js';
+import {parser} from '../config/uploadclud.js';
 import { Contacts } from './contacts.js';
 import { verifyToken} from '../config/verify.js';
 import { Projects } from './projects.js';
@@ -18,8 +19,8 @@ router.post('/api/auth/login',Authorrize.login)
 
 //aricle
 router.get('/api/articles/view', Articles.getArticles)
-router.post('/api/articles/add', verifyToken, upload.single('article_image'), Articles.createArticle)
-router.post('/api/articles/update', verifyToken, upload.single('article_image'), Articles.updateArticle)
+router.post('/api/articles/add', verifyToken, parser.single('article_image'), Articles.createArticle)
+router.post('/api/articles/update', verifyToken, parser.single('article_image'), Articles.updateArticle)
 router.post('/api/articles/delete', verifyToken, Articles.deleteArticle)
 console.log('>>>>>>>>>>')
 //coments
@@ -29,10 +30,10 @@ router.post('/api/comments/delete', verifyToken,Comments.deleteComment)
 
 //skills
 router.get('/api/skills/view', Skills.getSkills)
-router.post('/api/skills/add', verifyToken, upload.single('skill_image'), Skills.createSkills)
+router.post('/api/skills/add', verifyToken, parser.single('skill_image'), Skills.createSkills)
 //Projects
 router.get('/api/projects/view', Projects.getProject)
-router.post('/api/projects/add', verifyToken, upload.single('project_image'), Projects.createProject)
+router.post('/api/projects/add', verifyToken, parser.single('project_image'), Projects.createProject)
 
 // Contacts
 router.get('/api/contacts/view', Contacts.getContacts)
