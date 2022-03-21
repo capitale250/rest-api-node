@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">3.7% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>1/27</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">3.7% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>1/27</span>
             </div>
         
             
@@ -124,7 +124,29 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -132,18 +154,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,20 +224,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {skillsModel} from '../modules/models.js'
-&nbsp;
+import cloudinary from 'cloudinary';
+// import { file } from 'tmp';
+cloudinary.config({
+    cloud_name: 'djf1tigyw', 
+    api_key: '117152564788648', 
+    api_secret: 'OvWS3KxSzfQ-E8L5LA1GgQfd9Sc'
+}); 
 &nbsp;
 &nbsp;
 export class Skills{
     // list skills
 <span class="fstat-no" title="function not covered" >    st</span>atic createSkills(req, res) {
-     
+&nbsp;
         const file = <span class="cstat-no" title="statement not covered" >req.file</span>
-        //console.log(req.file)
+<span class="cstat-no" title="statement not covered" >        console.log(req.body.title)</span>
 <span class="cstat-no" title="statement not covered" >        if (!file) {</span>
             const error = <span class="cstat-no" title="statement not covered" >new Error('Please upload a file')</span>
 <span class="cstat-no" title="statement not covered" >            error.httpStatusCode = 400</span>
 <span class="cstat-no" title="statement not covered" >            return next(error)</span>
         }
+        // const file = req.file
+        // console.log(file)
+        // const tagname=req.files.FormFieldName 
+        // cloudinary.v2.uploader.upload(file, { tags:tagname }, function (err, image) {
+        //     console.log();
+        //     console.log("** File Upload");
+        //     if (err) { console.warn(err); }
+        //     console.log("* public_id for the uploaded image is generated by Cloudinary's service.");
+        //     console.log("* " + image.public_id);
+        //     console.log("* " + image.url);
+        //     waitForAllUploads("pizza", err, image);
+        //   });
 <span class="cstat-no" title="statement not covered" >        skillsModel.findOne({Title : req.body.title},<span class="fstat-no" title="function not covered" >fu</span>nction(skill){</span>
 <span class="cstat-no" title="statement not covered" >            if(skill){</span>
                 const error = <span class="cstat-no" title="statement not covered" >new Error('skill arleady exit  a file')</span>
@@ -208,21 +264,22 @@ export class Skills{
             }else{
 &nbsp;
     
-<span class="cstat-no" title="statement not covered" >        skillsModel.create({</span>
-        Title : req.body.title,
-        SkillImage : '/images/skills/' + file.filename,
-        //Description : 'A portfolio website where i can meet with my clients',
-        SkillDate: new Date()
-        }, 
-<span class="fstat-no" title="function not covered" >        fu</span>nction(err, skill) {
-<span class="cstat-no" title="statement not covered" >            if (err){</span>
-<span class="cstat-no" title="statement not covered" >                res.json(parserError(err));</span>
-            }else{
-<span class="cstat-no" title="statement not covered" >                res.json(skill)</span>
-                //console.log('skills created')
-            }   
-        }
-    );
+             
+<span class="cstat-no" title="statement not covered" >                skillsModel.create({</span>
+                Title : req.body.title,
+                SkillImage : '/images/skills/' + file.filename,
+                //Description : 'A portfolio website where i can meet with my clients',
+                SkillDate: new Date()
+                }, 
+<span class="fstat-no" title="function not covered" >                fu</span>nction(err, skill) {
+<span class="cstat-no" title="statement not covered" >                    if (err){</span>
+<span class="cstat-no" title="statement not covered" >                        res.json(parserError(err));</span>
+                    }else{
+<span class="cstat-no" title="statement not covered" >                        res.json(skill)</span>
+                        //console.log('skills created')
+                    }   
+                }
+            );
 }
 })
             }
@@ -253,7 +310,7 @@ export class Skills{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Mar 14 2022 12:43:51 GMT+0100 (Central European Standard Time)
+                at Mon Mar 21 2022 15:12:10 GMT+0100 (Central European Standard Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

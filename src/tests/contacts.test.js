@@ -5,12 +5,12 @@ import request from 'supertest'
 import app from '../../index.js'
 import jest from 'jest'
 import {newsletterModel, contactsModel} from '../modules/models.js'
-const token = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjY3NjVjYzczZmRhY2NhMmJkYzUzZiIsImlhdCI6MTY0NzI1MjI1NCwiZXhwIjoxNjQ3MzM4NjU0fQ.f9gakJuJHprHFkQ8N8HjjNcr9P2ExU19ctwJTOUh2p4"
+const token = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjY3NjVjYzczZmRhY2NhMmJkYzUzZiIsImlhdCI6MTY0Nzg2MzU4NCwiZXhwIjoxNjQ3OTQ5OTg0fQ.Ebxl4yBRMZoAIpBP0kNUzxRaQwNaY1e96CP7S6zZWsI"
 const agent = request.agent(app);
 chai.use(chaiHttp)
 
 var contact = {
-    "name":"js",
+    "name":"js2",
     "email":"js@gmail.com",
     "message":"mn vip"
 }
@@ -26,7 +26,7 @@ beforeAll(function(done){
         // chai.expect(res.body).be.a('object');
     done();
     });
-},50000)
+},100000)
 describe('Contact', function(){
    
     it('it should GET all the Contacts', (done) => {
@@ -38,9 +38,9 @@ describe('Contact', function(){
                 chai.expect(res.body).length(res.body.length).greaterThan(0);
                 done();
             })
-    },20000);
+    },100000);
     it('should delete a Contact', (done) =>{
-        contactsModel.findOne({Name: "js"}).then(function(result){
+        contactsModel.findOne({Name: "js2"}).then(function(result){
             chai.request(app)
             .post('/api/contacts/delete')
             .set('Content-Type', 'application/json')
@@ -57,13 +57,13 @@ describe('Contact', function(){
                 done(err)
             })                 
         })
-    })
+    },150000)
     // it('should view a Contact', (done) =>{
   
-    it('should insert a newsletters', (done) =>{
+    it('should insert a contact', (done) =>{
         var icontacts = {
-            "name":"jx",
-            "email":"jx@gmail.com",
+            "name":"armstrong",
+            "email":"ax@gmail.com",
             "message":"hi there"
         }
        
@@ -77,7 +77,7 @@ describe('Contact', function(){
             chai.expect(res.body).be.a('object');
             done();
         });
-    },20000)
+    },100000)
     it("should return 403", (done)=>{
         chai.request(app)
         .post("/api/contacts/add")
@@ -100,7 +100,7 @@ describe('Contact', function(){
 
 afterAll(function(done){
     
-    contactsModel.findOne({Name: "jx"}).then(function(result){
+    contactsModel.findOne({Name: "armstrong"}).then(function(result){
         chai.request(app)
         .post('/api/contacts/delete')
         .set('Content-Type', 'application/json')
@@ -115,5 +115,5 @@ afterAll(function(done){
             done(err)
         })                 
     })
-},20000)
+},100000)
 

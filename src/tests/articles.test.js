@@ -6,7 +6,7 @@ import chai from 'chai'
 import chaiHttp from 'chai-http'
 import request from 'supertest'
 import app from '../../index.js'
-import jest from 'jest'
+// import jest from 'jest'
 import {newsletterModel, articlesModel} from '../modules/models.js'
 // const {articlesModel} = require('../../index.js');
 
@@ -16,7 +16,7 @@ import {newsletterModel, articlesModel} from '../modules/models.js'
 chai.use(chaiHttp)
 const agent = request.agent(app);
 
-const token = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjY3NjVjYzczZmRhY2NhMmJkYzUzZiIsImlhdCI6MTY0NzI1MjI1NCwiZXhwIjoxNjQ3MzM4NjU0fQ.f9gakJuJHprHFkQ8N8HjjNcr9P2ExU19ctwJTOUh2p4"
+const token = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjY3NjVjYzczZmRhY2NhMmJkYzUzZiIsImlhdCI6MTY0Nzg2MzU4NCwiZXhwIjoxNjQ3OTQ5OTg0fQ.Ebxl4yBRMZoAIpBP0kNUzxRaQwNaY1e96CP7S6zZWsI"
 // beforeAll(() => jest.setTimeout(90 * 1000))
 beforeAll( function(done){
  
@@ -35,7 +35,7 @@ beforeAll( function(done){
     done();
     });
 
-},50000)
+},1000000)
 
 describe('Articles', function(){
     
@@ -50,12 +50,13 @@ describe('Articles', function(){
             .field("description", "this is from the test")
             .end((err, res) => {
                 if(err) done(err)                    
-                agent.expect(res).have.status(200);
-                agent.expect(res.body).be.a('object');
-                agent.expect(res.body).to.have.deep.property("_id")
+                                   
+                chai.expect(res).have.status(200);
+                chai.expect(res.body).be.a('object');
+                chai.expect(res.body).to.have.deep.property("_id")
             done();
             });
-    },20000)
+    },100000)
     
   
     it('should view an article', (done)=>{
@@ -95,8 +96,8 @@ describe('Articles', function(){
         request(app)
         .post('/api/articles/update')
         .set("Authorization", token)
-        .send({"title":"Coolest from postman (updated from test)"})
-        .send({"id":"6228905ace8eac57c10d6568"})
+        .send({"title":"Coolest from postman (updated 6 from test)"})
+        .send({"id":"62345cda14c8566e0a182a06"})
         .then((res)=>{
             chai.expect(res).have.status(200)
             chai.expect(res.body).to.be.an('object')
@@ -106,7 +107,7 @@ describe('Articles', function(){
         .catch((err)=>{
             done(err)
         })
-    })
+    },100000)
     it('should delete article', function(done){
         
         articlesModel.findOne({Title: "1article to delete"}).then(function(result){
@@ -126,7 +127,11 @@ describe('Articles', function(){
                 done(err)
             })                 
         })
-})
+        .catch((err) =>{
+            console.log(err)
+            done(err)
+        })
+    },100000)
 })
 afterAll(function(){
     articlesModel.findOne({Title: "2Yeah from tests"}).then(function(result){
@@ -159,4 +164,3 @@ afterAll(function(){
             //done(err)   //  --verbose --silent   "test": "jest --watchAll --coverage --runInBand  --require babel-register ./src/tests",
         })
 })
-

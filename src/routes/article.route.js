@@ -28,9 +28,9 @@ export class Articles{
     
    
     static createArticle(req, res, next) {
-      
+                //console.log('************')
                 const file = req.file
-                
+                //console.log(req.file)
                 if (!file) {
                     const error = new Error('Please upload a file')
                     error.httpStatusCode = 400
@@ -44,7 +44,7 @@ export class Articles{
                    else{
                    articlesModel.create({
                     Title : req.body.title,
-                    FeaturedImage : '/images/articles/' + req.file.filename /*'images/kbs.jpg'*/,
+                    FeaturedImage : '/images/articles/' + req.file.filename ,
                     Description :req.body.description ,
                     PostDate: new Date()
                     }, 
