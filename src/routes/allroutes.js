@@ -39,12 +39,12 @@ router.post('/api/projects/delete',verifyToken, Projects.deleteproject)
 
 // Contacts
 router.get('/api/contacts/view', Contacts.getContacts)
-router.post('/api/contacts/add', verifyToken, Contacts.createContact)
+router.post('/api/contacts/add',  Contacts.createContact)
 router.post('/api/contacts/delete',verifyToken, Contacts.deleteContact)
 
 //Newsletter
 router.get('/api/newsletter/view', Newsletter.getNews)
-router.post('/api/newsletter/add', verifyToken, Newsletter.createNewsletter)
+router.post('/api/newsletter/add',  Newsletter.createNewsletter)
 router.post('/api/newsletter/delete', verifyToken, Newsletter.deleteNewsletter)
 
 
