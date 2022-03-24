@@ -53,4 +53,12 @@ export class Projects{
             
 
     }
+     static deleteproject(req,res){
+        const id=req.query.id;
+        projectsModel.deleteOne({id},(err,resp)=>{
+            if(err) res.send(err)
+            res.json(resp)
+
+        })
+    }
 }
