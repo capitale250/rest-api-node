@@ -31,9 +31,11 @@ router.post('/api/comments/delete', verifyToken,Comments.deleteComment)
 //skills
 router.get('/api/skills/view', Skills.getSkills)
 router.post('/api/skills/add', verifyToken, parser.single('skill_image'), Skills.createSkills)
+router.post('/api/skills/delete', verifyToken,  Skills.deleteskill)
 //Projects
 router.get('/api/projects/view', Projects.getProject)
 router.post('/api/projects/add', verifyToken, parser.single('project_image'), Projects.createProject)
+router.post('/api/projects/delete',verifyToken, Projects.deleteproject)
 
 // Contacts
 router.get('/api/contacts/view', Contacts.getContacts)
