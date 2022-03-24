@@ -58,4 +58,12 @@ export class Skills{
             });
         }
     }
+     static deleteskill(req,resp){
+        const id =req.query.id;
+        skillsModel.deleteOne({id},(err,res)=>{
+            if(err) { resp.send('cant find an id')}
+               
+            resp.send(res)
+        })
+    }
 }
