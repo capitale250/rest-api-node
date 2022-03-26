@@ -70,7 +70,7 @@ export class Newsletter{
 
                 var id = req.body.id
                 try{
-                    newsletterModel.findOneAndDelete(id, 
+                    newsletterModel.findByIdAndDelete(id, 
                         function(err, emailInfo) {
                             if (err){
                                 return res.json(parserError(err));
