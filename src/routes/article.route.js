@@ -22,7 +22,7 @@ export class Articles{
                     res.send(err)
                 res.json(articles);
                 //console.log('Articles returned')
-            });
+            }).sort({"Title":-1,_id:0});
         }
     }
     
