@@ -9,7 +9,7 @@ export class Contacts {
                 res.send(err)
             res.json(contacts);
             //console.log('Contacts returned')
-        });
+        }).sort({"Email":-1,_id:0});
     }
     // create a new contact
     static createContact(req, res) {
@@ -34,7 +34,7 @@ export class Contacts {
     static deleteContact(req, res) {
      
                 var id = req.body.id
-                contactsModel.findOneAndDelete(id, 
+                contactsModel.findByIdAndDelete(id, 
                     function(err, emailInfo) {
                         if (err){
                             res.json(err);
